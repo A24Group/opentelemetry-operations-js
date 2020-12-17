@@ -1,35 +1,70 @@
 {
-  "name": "opentelemetry-operations-js",
-  "version": "0.4.0",
-  "description": "OpenTelemetry is a distributed tracing and stats collection framework.",
+  "name": "@google-cloud/opentelemetry-cloud-trace-exporter",
+  "version": "0.7.0",
+  "description": "OpenTelemetry Google Cloud Trace Exporter allows the user to send collected traces to Google Cloud Trace.",
+  "main": "packages/opentelemetry-cloud-trace-exporter/build/src/index.js",
+  "types": "packages/opentelemetry-cloud-trace-exporter/build/src/index.d.ts",
+  "repository": "GoogleCloudPlatform/opentelemetry-operations-js",
   "scripts": {
-    "clean": "lerna run clean",
-    "postinstall": "npm run bootstrap",
-    "precompile": "tsc --version",
-    "compile": "lerna run compile",
-    "codecov": "lerna run codecov",
-    "test": "lerna run test",
-    "bootstrap": "lerna bootstrap",
-    "lint": "lerna run lint",
-    "fix": "lerna run fix"
+    "codecov": "nyc report --reporter=json && codecov -f coverage/*.json -p ../../",
+    "lint": "gts lint",
+    "clean": "gts clean",
+    "compile": "tsc",
+    "prepare": "npm run compile",
+    "test": "nyc ts-mocha -p tsconfig.json 'test/**/*.test.ts'",
+    "fix": "gts fix",
+    "pretest": "npm run compile"
   },
-  "repository": "https://github.com/GoogleCloudPlatform/opentelemetry-operations-js",
   "keywords": [
     "opentelemetry",
     "nodejs",
     "tracing",
-    "monitoring",
-    "logs",
-    "google-cloud-trace",
-    "google-cloud-monitoring",
-    "google-cloud-logs"
+    "google-cloud-trace"
   ],
   "author": "Google Inc.",
   "license": "Apache-2.0",
   "engines": {
     "node": ">=10"
   },
+  "files": [
+    "build/src/**/*.js",
+    "build/src/**/*.d.ts",
+    "doc",
+    "LICENSE",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://wombat-dressing-room.appspot.com"
+  },
   "devDependencies": {
-    "lerna": "3.22.1"
+    "@opentelemetry/api": "^0.13.0",
+    "@opentelemetry/resources": "^0.13.0",
+    "@opentelemetry/tracing": "^0.13.0",
+    "@types/mocha": "7.0.2",
+    "@types/node": "14.14.7",
+    "@types/sinon": "9.0.8",
+    "codecov": "3.8.1",
+    "gcp-metadata": "4.2.1",
+    "gts": "^3.0.2",
+    "mocha": "7.2.0",
+    "nock": "13.0.5",
+    "nyc": "15.1.0",
+    "rimraf": "3.0.2",
+    "sinon": "9.2.1",
+    "ts-mocha": "8.0.0",
+    "typescript": "^4.0.3"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.1.8",
+    "@grpc/proto-loader": "^0.5.5",
+    "google-auth-library": "^6.1.3",
+    "google-proto-files": "^2.1.0"
+  },
+  "peerDependencies": {
+    "@opentelemetry/api": "^0.13.0",
+    "@opentelemetry/core": "^0.13.0",
+    "@opentelemetry/resources": "^0.13.0",
+    "@opentelemetry/tracing": "^0.13.0"
   }
 }
