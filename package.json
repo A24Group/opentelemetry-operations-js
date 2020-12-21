@@ -6,14 +6,6 @@
   "types": "packages/opentelemetry-cloud-trace-exporter/build/src/index.d.ts",
   "repository": "GoogleCloudPlatform/opentelemetry-operations-js",
   "scripts": {
-    "codecov": "nyc report --reporter=json && codecov -f coverage/*.json -p ../../",
-    "lint": "gts lint",
-    "clean": "gts clean",
-    "compile": "tsc",
-    "prepare": "npm run compile",
-    "test": "nyc ts-mocha -p tsconfig.json 'test/**/*.test.ts'",
-    "fix": "gts fix",
-    "pretest": "npm run compile"
   },
   "keywords": [
     "opentelemetry",
